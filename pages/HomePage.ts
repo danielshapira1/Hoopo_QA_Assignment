@@ -2,9 +2,6 @@ import { Page, Locator, expect } from '@playwright/test';
 import { AdminLoginPage } from './AdminLoginPage';
 import { RoomPage } from './RoomPage';
 
-/**
- * Page Object for the home screen
- */
 export class HomePage {
   page: Page;
   admin: Locator;
@@ -32,7 +29,8 @@ export class HomePage {
 
   async bookRoom(): Promise<RoomPage> {
     await this.roomSelector.click();
-    await this.page.waitForURL('**/admin'); 
+    await this.page.waitForURL('**/reservation/1?checkin=**')
+    await this.page.waitForTimeout(500);
     return new RoomPage(this.page);
   }
 }

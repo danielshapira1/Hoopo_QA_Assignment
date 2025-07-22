@@ -7,8 +7,6 @@ export class AdminLoginPage {
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
     
-    
-
     constructor(page: Page) {
         this.page = page;
         this.usernameInput = page.locator('#username');
@@ -28,20 +26,16 @@ export class AdminLoginPage {
         const isErrorVisible = await this.page.getByText('Invalid credentials').isVisible();
 
         if (isErrorVisible) {
-        console.log('❌ Login failed: Invalid credentials');
+        console.log('Login failed: Invalid credentials');
         return false;
         }
 
         // Optionally check if you're on the right page
         await this.page.waitForURL('**/admin/rooms', { timeout: 3000 });
-        console.log('✅ Login successful');
+        console.log('Login successful');
         return true;
     }
 
-    /**
-     * Returns AdminPage object after a successful login.
-     * Should only be called if login() returned true.
-     */
     getAdminPage(): AdminPage {
         return new AdminPage(this.page);
   }
